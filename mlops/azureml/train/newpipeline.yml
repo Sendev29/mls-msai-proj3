@@ -15,7 +15,7 @@ outputs:
   test_data:
     type: uri_folder  # Specify the type for test_data output
   model_info_output_path:
-    type: uri_file  # Specify the type for model_info_output_path output
+    type: uri_folder  # Specify the type for model_info_output_path output
 
 settings:
   default_datastore: azureml:workspaceblobstore
@@ -57,7 +57,7 @@ jobs:
         values: [10, 20, 30, 50]
       max_depth:
         type: Choice  # Specify the type for max_depth
-        values: [5,10,15,20]  # Provide the values for max_depth
+        values: [3,5,7,9]  # Provide the values for max_depth
     objective:
       goal: minimize
       primary_metric: MSE
