@@ -15,9 +15,9 @@ import mlflow.sklearn
 def parse_args():
     '''Parse input arguments'''
 
-    parser = argparse.ArgumentParser("train")
-    
+      
     # -------- WRITE YOUR CODE HERE --------
+    # Step 1: Define arguments for train data, test data, model output, and RandomForest hyperparameters. Specify their types and defaults.  
     parser = argparse.ArgumentParser("train")
     parser.add_argument("--train_data", type=str, help="Path to train dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
@@ -27,9 +27,7 @@ def parse_args():
     parser.add_argument('--max_depth', type=int, default=None,
                         help='The maximum depth of the tree. If None, then nodes are expanded until all leaves are pure or until all leaves contain less than min_samples_split samples.')
     
-    # Step 1: Define arguments for train data, test data, model output, and RandomForest hyperparameters. Specify their types and defaults.  
-
-
+    
     args = parser.parse_args()
 
     return args
@@ -43,10 +41,10 @@ def main(args):
     train_df = pd.read_csv(Path(args.train_data)/"train.csv")
     test_df = pd.read_csv(Path(args.test_data)/"test.csv")
     # Step 3: Split the data into features (X) and target (y) for both train and test datasets. Specify the target column name.
-    y_train = train_df['Failure']
-    X_train = train_df.drop(columns=['Failure'])
-    y_test = test_df['Failure']
-    X_test = test_df.drop(columns=['Failure'])
+    y_train = train_df['target']
+    X_train = train_df.drop(columns=['target'])
+    y_test = test_df['target']
+    X_test = test_df.drop(columns=['target'])
     # Step 4: Initialize the RandomForest Regressor with specified hyperparameters, and train the model using the training data.
     model = RandomForestRegressor(n_estimators=args.n_estimators, max_depth=args.max_depth, random_state=42)
     model.fit(X_train, y_train)
