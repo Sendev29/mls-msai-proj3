@@ -38,10 +38,9 @@ jobs:
     outputs:
       train_data: ${{parent.outputs.train_data}}
       test_data: ${{parent.outputs.test_data}}
-
   sweep_step:
     name: sweep_job
-    display_name: sweep-job  # Hint: Provide the display name for the job
+    display_name: sweep-job
     type: sweep
     inputs:
       train_data: ${{parent.jobs.prep_data.outputs.train_data}}
@@ -49,15 +48,15 @@ jobs:
     outputs:
       model_output:
         type: mlflow_model
-    sampling_algorithm: random  # Specify the sampling algorithm
-    trial: azureml:used-cars-train-component@latest  # Refers to a separate command component
+    sampling_algorithm: random
+    trial: azureml:train_model@latest  # ✅ Use the registered training component
     search_space:
       n_estimators:
         type: choice
         values: [10, 20, 30, 50]
       max_depth:
-        type: choice  # Specify the type for max_depth
-        values: [3,5,7,10, None]  # Provide the values for max_depth
+        type: choice
+        values: [3, 5, 7, 10, -1]  # Use -1 instead of None
     objective:
       goal: minimize
       primary_metric: MSE
@@ -65,7 +64,6 @@ jobs:
       max_total_trials: 20
       max_concurrent_trials: 10
       timeout: 7200
-
 
   register_model:
     name: register_model  # Provide the job name
@@ -82,4 +80,3 @@ jobs:
       model_path: ${{parent.jobs.sweep_step.outputs.model_output}}
     outputs:
       model_info_output_path: ${{parent.outputs.model_info_output_path}}
-
