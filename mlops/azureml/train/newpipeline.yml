@@ -69,7 +69,7 @@ jobs:
 
   register_model:
     name: register_model  # Provide the job name
-    display_name: Regiseter-Model  # Provide the display name for the job
+    display_name: regiseter-Model  # Provide the display name for the job
     code: ../../../data-science/src
     command: >-
       python register.py 
