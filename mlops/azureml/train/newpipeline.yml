@@ -50,8 +50,13 @@ jobs:
         type: mlflow_model
     sampling_algorithm: random
     trial: 
-      type: sweep
-      component: azureml:train_model@latest  # ✅ Use the registered training component
+      command: >-
+        python train.py 
+        --train_data ${{inputs.train_data}} 
+        --test_data ${{inputs.test_data}} 
+        --model_output ${{outputs.model_output}}
+        environment: azureml:used-cars-train-env@latest  # ✅ Ensure this environment exists
+        code: ../../../data-science/src  # ✅ Ensure the path is correct
     search_space:
       n_estimators:
         type: choice
