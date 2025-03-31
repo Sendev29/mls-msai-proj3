@@ -50,7 +50,7 @@ jobs:
         type: mlflow_model
     sampling_algorithm: random
     trial: 
-      type: command
+      type: sweep
       component: azureml:train_model@latest  # ✅ Use the registered training component
     search_space:
       n_estimators:
