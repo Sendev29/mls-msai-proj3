@@ -49,7 +49,9 @@ jobs:
       model_output:
         type: mlflow_model
     sampling_algorithm: random
-    trial: azureml:train_model@latest  # ✅ Use the registered training component
+    trial: 
+      type: command
+      component: azureml:train_model@latest  # ✅ Use the registered training component
     search_space:
       n_estimators:
         type: choice
