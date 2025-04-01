@@ -19,4 +19,4 @@ variables:
 
   # For pipeline reference
   resource_group: msazure-default
-  aml_workspace: FitwellWorkspace  
+  aml_workspace: FitwellWorkspace
