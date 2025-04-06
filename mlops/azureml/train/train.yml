@@ -2,6 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.jso
 type: command  # This is correct for trial definitions
 name: train_model
 display_name: train_model
+type: command 
 inputs: 
   train_data:
     type: uri_folder # Specify the type for train_data
@@ -11,7 +12,7 @@ inputs:
     type: integer  # Specify the type for n_estimators
     default: 100  # Provide the default value for n_estimators
   max_depth:
-    type: int  # Specify the type for max_depth
+    type: integer  # Specify the type for max_depth
     default: 5  # Provide the default value for max_depth
 outputs:
   model_output:
