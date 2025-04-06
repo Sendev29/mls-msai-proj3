@@ -16,7 +16,7 @@ inputs:
     default: 5  # Provide the default value for max_depth
 outputs:
   model_output:
-    type: model_output  # Specify the type for model_output
+    type: mlflow_model  # Specify the type for model_output
 code: ../../../data-science/src
 command: >-
   python train.py 
