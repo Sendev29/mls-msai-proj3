@@ -59,7 +59,7 @@ jobs:
         type: choice  # Specify the type for max_depth
         values: [5,10,15,20]  # Provide the values for max_depth
     objective:
-      goal: minimize
+      goal: Minimize
       primary_metric: MSE
     limits:
       max_total_trials: 20
