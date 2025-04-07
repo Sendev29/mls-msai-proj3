@@ -36,14 +36,14 @@ def main(args):
     test_df = pd.read.csv(Path(args.test_data) / "test.csv")
 
     # Split the data into ______(X) and ______(y) 
-    y_train = train_df['price']  # Specify the target column
-    X_train = train_df.drop(columns=['price'])
-    y_test = test_df['price']
-    X_test = test_df.drop(columns=['price'])
+    X_train = train_df.drop('price', axis=1).values
+    y_train = train_df['price'].values
+    X_test = test_df.drop('price', axis=1).values
+    y_test = test_df['price'].values
 
     # Initialize and train a RandomForest Regressor
     model = RandomForestRegressor(n_estimators=args.n_estimators, max_depth=args.max_depth, random_state=42)  # Provide the arguments for RandomForestRegressor
-    model.fit(X_train, y_train)  # Train the model
+    model = model.fit(X_train, y_train)  # Train the model
 
     # Log model hyperparameters
     mlflow.log_param("model", "Random Forest Regressor")  # Provide the model name
