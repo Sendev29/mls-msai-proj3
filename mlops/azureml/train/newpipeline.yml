@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
 type: pipeline
 display_name: used-cars-pipeline  # Provide the display name for the pipeline
-experiment_name: used-cars-pipeline  # Provide the experiment name
+experiment_name: price_prediction_pipeline  # Provide the experiment name
 description: Training job for used-cars dataset using Random Forest Regressor  # Provide the description for the pipeline
 
 inputs:
@@ -25,7 +25,7 @@ settings:
 jobs:
   prep_data:
     name: data_preparation  # Provide the job name
-    display_name: data-preparation  # Provide the display name for the job
+    display_name: Data preparation for Training # Provide the display name for the job
     code: ../../../data-science/src
     command: >-
       python prep.py  
@@ -54,10 +54,10 @@ jobs:
     search_space:
       n_estimators:
         type: choice
-        values: [10, 25, 40, 50]
+        values: [10, 20, 30, 50]
       max_depth:
         type: choice  # Specify the type for max_depth
-        values: [3, 5, 7, 10]  # Provide the values for max_depth
+        values: [5, 10, 15, 20]  # Provide the values for max_depth
     objective:
       goal: minimize
       primary_metric: MSE
@@ -68,8 +68,8 @@ jobs:
 
 
   register_model:
-    name: used-car-registered-regressor  # Provide the job name
-    display_name: used-car-registered-regressor  # Provide the display name for the job
+    name: used_cars_price_prediction_model  # Provide the job name
+    display_name: random_forest_price_regressor  # Provide the display name for the job
     code: ../../../data-science/src
     command: >-
       python register.py 
