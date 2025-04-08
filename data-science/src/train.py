@@ -46,8 +46,8 @@ def main(args):
     y_test = test_df['price'].values
 
     # Step 4: Initialize the RandomForest Regressor with specified hyperparameters, and train the model using the training data.
-    rf_model = RandomForestRegressor(n_estimators=args.n_estimators, max_depth=args.max_depth)
-    rf_model = rf_model.fit(X_train, y_train)
+    model = RandomForestRegressor(n_estimators=args.n_estimators, max_depth=args.max_depth)
+    model = model.fit(X_train, y_train)
     
     # Step 5: Log model hyperparameters like 'n_estimators' and 'max_depth' for tracking purposes in MLflow.  
     mlflow.log_param("model", "random_forest_regressor")
@@ -61,7 +61,7 @@ def main(args):
     # Step 7: Log the MSE metric in MLflow for model evaluation, and save the trained model to the specified output path.
     print(f'MSE of Random Forest Regressor on test set: {mse:.2f}')
     mlflow.log_metric("MSE", float(mse))  
-    mlflow.sklearn.save_model(sk_model=rf_model, path=args.model_output)
+    mlflow.sklearn.save_model(sk_model=model, path=args.model_output)
 
 if __name__ == "__main__":
     
