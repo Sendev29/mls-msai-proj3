@@ -3,6 +3,13 @@ name: deploy-model-training-pipeline
 on: 
   workflow_dispatch:
 jobs:
+  setup-az-ml-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Azure CLI ML extension (force clean)
+        run: |
+          az extension remove --name ml || true
+          az extension add --name ml --yes --force
   get-config:
     uses: Azure/mlops-templates/.github/workflows/read-yaml.yml@main
     with:
