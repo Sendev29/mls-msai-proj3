@@ -9,8 +9,8 @@ jobs:
     steps:
       - name: Install Azure CLI ML extension (force clean)
         run: |
-          az extension remove --name ml || true
-          az extension add --name ml --yes --force
+          az extension remove --name ml || echo "ml extension not installed"
+          az extension add --name ml --yes --upgrade
 
   get-config:
     needs: setup-az-ml-extension
